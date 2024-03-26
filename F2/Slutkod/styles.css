@@ -1,0 +1,180 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+.text-class{
+    background-color: red;
+    /*background-color: red !important;*/
+}
+
+#text-id{
+    background-color: green;
+}
+
+
+
+
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td{
+    border: 1px solid black;
+    padding: 12px;
+    font-size: 32px;
+}
+
+
+
+.link{
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 12px 16px;
+    background-color: goldenrod;
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+}
+
+
+
+
+
+
+
+
+
+
+
+.box-root{
+    border: 1px solid black;
+}
+
+.box{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+    margin: 12px;
+    padding: 12px;
+
+    
+    width: 300px;
+    height: 300px;
+}
+
+.box > p{
+    border: 1px solid black;
+}
+
+
+
+
+.flex{
+    font-size: 32px;
+    display: flex;
+    margin-bottom: 24px;
+    height: 300px;
+}
+
+.wrap{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex > * {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#main{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.title{
+    width: 100%
+}
+
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.menu{
+    width: 20%;
+}
+
+.text{
+    width: 80%;
+}
+
+
+
+
+.content > ul{
+    list-style: none;
+}
+
+
+
+
+
+
+
+.row{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+
+
+.g{
+    background-color: green;
+}
+
+.b{
+    background-color: blue;
+}
+
+.r{
+    background-color: red;
+}
