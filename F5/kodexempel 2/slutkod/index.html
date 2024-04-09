@@ -8,18 +8,62 @@
             .hidden {
                 display: none !important;
             }
+
+            body{
+                background-color: red;
+            }
         </style>
     </head>
     <body>
         <div id="main">
+            <button>Click me!</button>
+            <button>Click me!</button>
 
+
+            <div id="content">
+
+            </div>
+
+            <input type="text" id="input">
+
+            <button id="toggle">Toggle</button>
+            <div class="toggle">
+                <p>Detta är en text!</p>
+            </div>
         </div>
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <script type="text/javascript">
+            let main = document.getElementById("main");
+            console.log(main);
+            console.log($("#main"));
+            /*$("#main").text("Hello world!");
+            main.text("Hello world!");*/
+           // main.innerHTML = "<b>Hello world</b>";
+            //$("#main").html("<b>Hello world</b>");
 
+            let index = 1;
+            $("button").click(function(){   
+                //$("button").text("New text!");
+                $(this).text("New text!");
+
+                //$("#content").append("<p>Testing new " + index + "</p>");
+               // $("#content").prepend("<p>Testing new " + index + "</p>");
+                $("#content").before("<p>Testing new " + index + "</p>");
+                index++;
+            });
+
+            $("#toggle").on("click", function(){
+                $("div.toggle").toggleClass("hidden");
+            });
+
+
+            $("#input").on("input", function(){
+                //document.body.style.backgroundColor = "red";
+                $("body").css("background-color", $(this).val());
+            });
         </script>
     </body>
 

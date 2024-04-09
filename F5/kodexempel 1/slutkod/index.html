@@ -23,6 +23,84 @@
 
 
     <script type="text/javascript">
+        let GUI = {
+            output: null,
+            addBtn: null,
+            removeBtn: null,
+            courseInput: null,
+            removeInput: null,
+
+            init: function(){
+                this.output = document.getElementById("output");
+                this.addBtn = document.getElementById("add-btn");
+                this.removeBtn = document.getElementById("remove-btn");
+                this.courseInput = document.querySelector("#course-input");
+                this.removeInput = document.querySelector("#remove-input");
+            
+                this.addListeners();
+            },
+
+            addListeners: function(){
+                this.addBtn.addEventListener("click", function(){
+                    let name = GUI.courseInput.value;
+                    Database.addCourse(name);
+
+                    GUI.courseInput.value = "";
+                    //GUI.displayCourses();
+                });
+
+                this.removeBtn.addEventListener("click", function(){
+                    let id = GUI.removeInput.value;
+                    Database.removeCourse(id);
+
+                    GUI.removeInput.value = "";
+                    GUI.displayCourses();
+                })
+            },
+
+            displayCourses: function(){
+                this.output.innerHTML = "";
+                for(let i = 0; i < Database.courses.length; i++){
+                    let p = document.createElement("p");
+                    p.textContent = "ID: " + Database.courses[i].id + " | Name: " + Database.courses[i].name;
+                    
+                    this.output.appendChild(p);
+                }
+            }
+
+        }
+
+        GUI.init();
+
+        console.log(GUI);
+
+
+
+
+        let Database = {
+            courses: Array(),
+
+            addCourse: function(name){
+                let id = Math.round(Math.random() * 100);
+                let course = {
+                    id: id,
+                    name: name
+                }
+
+                this.courses.push(course);
+
+                GUI.displayCourses();
+            },
+
+            removeCourse: function(id){
+                for(let i = 0; i < this.courses.length; i++){
+                    if(this.courses[i].id == id){
+                        this.courses.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+        }
 
     </script>
 </body>
