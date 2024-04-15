@@ -157,7 +157,144 @@
 
 
     <script type="text/javascript">
+        var Model = {
+            order: Array(),
 
+            init: function(){
+                Controller.command("generateList", Menu.pizzas);
+            },
+
+            emptyOrder: function(){
+                this.order = Array();
+            },
+
+            addOrder: function(data){
+                this.order.push(data);
+                Controller.command("generateOrders", this.order);
+            },
+
+            getPizzas: function(){
+                return Menu.pizzas;
+            }
+        }
+
+        var View = {
+            list: null,
+            orderList: null,
+            checkoutBtn: null,
+            total: null,
+
+            init: function(){
+                this.list = document.getElementById("list");
+                this.orderList = document.getElementById("order-list");
+                this.checkoutBtn = document.getElementById("checkout");
+                this.total = document.getElementById("total");
+
+                this.checkoutBtn.addEventListener("click", function(){
+                    View.orderList.innerHTML = "";
+                    View.total.textContent = "0 kr";
+
+                    
+                    Controller.command("emptyOrder");
+                });
+            },
+            
+            generateOrders: function(data){
+                let price = 0;
+                this.orderList.innerHTML = "";
+                for(let i = 0; i < data.length; i++){
+                    let p = document.createElement("p");
+                    p.textContent = data[i].name;
+
+                    //100   ==> 100
+                    //"100" ==> 100
+                    price += parseInt(data[i].price);
+
+                    this.orderList.appendChild(p);
+                }
+                this.total.textContent = price + " kr";
+            },
+
+            generateList: function(data){
+                //data == pizzas
+                for(let i = 0; i < data.length; i++){
+                    this.createListItem(data[i]);
+                }
+            },
+
+            createListItem: function(pizza){
+                let item = document.createElement("div");
+                item.setAttribute("class", "list-item");
+
+                item.addEventListener("click", function(){
+                    let order = {
+                        name: pizza.name,
+                        price: pizza.price
+                    }
+                    Controller.command("addOrder", order);
+                });
+
+                let name = document.createElement("span");
+                name.setAttribute("class", "name");
+                name.textContent = pizza.name;
+
+                let price = document.createElement("span");
+                price.setAttribute("class", "price");
+                price.textContent = pizza.price + " kr";
+
+                
+                let ingredients = document.createElement("span");
+                ingredients.setAttribute("class", "ingredients");
+                let allIngredients = "";
+
+                for(let i = 0; i < pizza.ingredients.length; i++){
+                    allIngredients += pizza.ingredients[i] + " ";
+                }
+
+                ingredients.textContent = allIngredients;
+
+                item.appendChild(name);
+                item.appendChild(price);
+                item.appendChild(ingredients);
+
+                this.list.appendChild(item);
+            }
+        }
+
+      
+
+        var Controller = {
+            init: function(){
+                View.init();
+                Model.init();
+            },
+
+            command: function(c, data = null){
+                if(c == "getPizzas"){
+                    return Model.getPizzas();
+                }else if(c == "generateList"){
+                    View.generateList(data);
+                }else if(c == "test"){
+                    View.test();
+                }else if(c == "addOrder"){
+                    Model.addOrder(data);
+                }else if(c == "generateOrders"){
+                    View.generateOrders(data);
+                }else if(c == "emptyOrder"){
+                    Model.emptyOrder();
+                }
+            }
+        }
+
+        Controller.init();
+
+/*
+        View.createListItem({
+            name: "Test 1",
+            price: 100,
+            ingredients: ["1", "2", "3"]
+        });
+*/
     </script>
 </body>
 </html>
